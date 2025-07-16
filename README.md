@@ -1,82 +1,86 @@
 # Autonomous Agents API
 
-A Node.js/Express API for portfolio and resume enhancement, powered by autonomous agents and LangChain. This API provides endpoints for interacting with a portfolio chatbot, retrieving developer information, and generating cover letters.
+A modern, production-ready Node.js/Express API for portfolio, powered by autonomous agents and LangGraph. This API enables dynamic portfolio Q&A, developer info retrieval, and AI-powered cover letter generation—all with robust session management and security best practices.
 
-**Demo:** [agentic-api.ksoftdev.site](https://agentic-api.ksoftdev.site/api-docs)
-
----
-
-## Features
-
-- Portfolio chatbot agent for Q&A about projects, skills, experience, and more
-- Cover letter generation agent
-- Endpoints for listing experiences, services, projects, certificates, and skills
-- Session management with PostgreSQL
-- Rate limiting and security best practices
-- OpenAPI/Swagger documentation
+**Live Demo:** [agentic-api.ksoftdev.site/api-docs](https://agentic-api.ksoftdev.site/api-docs)
 
 ---
 
-## API Endpoints
+## 🚀 Features
+
+- **Portfolio Chatbot Agent**: Ask about projects, skills, experience, and more.
+- **Comprehensive Portfolio Data**: Endpoints for experiences, services, projects, certificates, and skills.
+- **Session Management**: Secure sessions with PostgreSQL.
+- **Rate Limiting & Security**: Built-in protection against abuse and common vulnerabilities.
+- **OpenAPI/Swagger Documentation**: Interactive API docs for easy exploration.
+
+---
+
+## 📚 API Endpoints
 
 | Endpoint | Method | Description | Body |
 |----------|--------|-------------|------|
 | `/api/v1/agents` | GET | List all available agents | - |
-| `/api/v1/agents/:agent` | POST | Interact with a specific agent (e.g., portfolio) | `{ "message": "...", "history": [...] }` |
+| `/api/v1/agents/:agent` | POST | Interact with a specific agent (e.g., portfolio, cover-letter) | `{ "message": "...", "history": [...] }` |
 
-
-## Usage Example
-
-**Chat with the Portfolio Agent:**
+### Example: Chat with the Portfolio Agent
 ```bash
 curl -X POST https://agentic-api.ksoftdev.site/api/v1/agents/portfolio \
   -H "Content-Type: application/json" \
-  -d '{"message": "What are your frontend projects?", "history": []}'
+  -d '{"message": "What are your frontend projects?"}'
 ```
 
-**Generate a Cover Letter:**
+### Example: Chat with the Github Agent
 ```bash
-curl -X POST https://agentic-api.ksoftdev.site/api/v1/agents/cover-letter \
+curl -X POST https://agentic-api.ksoftdev.site/api/v1/agents/github \
   -H "Content-Type: application/json" \
-  -d '{"message": "I am applying for a frontend developer role at Company X."}'
+  -d '{"message": "What is your top programming language?"}'
 ```
 
 ---
 
-## Documentation
+## 🏁 Quick Start
 
-- **Swagger UI:** [https://agentic-api.ksoftdev.site/api-docs](https://agentic-api.ksoftdev.site/api-docs)
-- **Swagger JSON:** [https://agentic-api.ksoftdev.site/swagger.json](https://agentic-api.ksoftdev.site/swagger.json)
-
----
-
-## Tech Stack
-
-- Node.js, Express
-- TypeScript
-- LangChain/LangGraph
-- Swagger/OpenAPI
-
----
-
-## Development
-
-Install dependencies:
+### 1. Clone & Install
 ```bash
+git clone https://github.com/ken-027/agentic-api.git
+cd agentic-api
 npm install
 ```
 
-Run in development mode:
+### 2. Development Mode
 ```bash
 npm run dev
 ```
 
-Build for production:
+### 3. Build for Production
 ```bash
 npm run build
 ```
 
-Run tests:
+### 4. Run Tests
 ```bash
 npm run test:e2e
 ```
+
+### 5. Run with Docker
+```bash
+docker-compose up --build
+```
+
+---
+
+## 🛠️ Tech Stack
+
+- **Node.js & Express** – Fast, scalable backend framework
+- **TypeScript** – Type-safe JavaScript
+- **LangChain/LangGraph** – Autonomous agent orchestration
+- **PostgreSQL** – Session and data storage
+- **Swagger/OpenAPI** – API documentation
+
+---
+
+## 📖 Documentation
+
+- **Swagger UI:** [https://agentic-api.ksoftdev.site/api-docs](https://agentic-api.ksoftdev.site/api-docs)
+- **Swagger JSON:** [https://agentic-api.ksoftdev.site/swagger.json](https://agentic-api.ksoftdev.site/swagger.json)
