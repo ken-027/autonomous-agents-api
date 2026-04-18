@@ -15,10 +15,12 @@ import { tool } from "@langchain/core/tools";
 import axios from "axios";
 import { z } from "zod";
 
+const apiUrl = "https://portfolio-api.kdevtech.com/api/v1/portfolio";
+
 export const skillsResource = tool(
     async () => {
         const { data } = await axios.get(
-            "https://portfolio-api.ksoftdev.site/api/v1/portfolio/skills",
+            `${apiUrl}/skills`,
         );
 
         const skills = (data.skills as Skill[]).map(({ name, items }) => ({
@@ -45,8 +47,10 @@ export const skillsResource = tool(
 export const servicesResource = tool(
     async () => {
         const { data } = await axios.get(
-            "https://portfolio-api.ksoftdev.site/api/v1/portfolio/services",
+            `${apiUrl}/services`,
         );
+
+        console.log("services data", data);
 
         const services = (data.services as Service[]).map(
             ({ description, title }) => ({ title, description }),
@@ -104,7 +108,7 @@ export const contactResource = tool(
 export const developerPlatform = tool(
     async () => {
         const { data } = await axios.get(
-            "https://portfolio-api.ksoftdev.site/api/v1/portfolio/developer-platform",
+            `${apiUrl}/developer-platform`,
         );
 
         const platforms = (data.platforms as DeveloperPlatform[]).map(
@@ -126,7 +130,7 @@ export const developerPlatform = tool(
 export const projectsResource = tool(
     async () => {
         const { data } = await axios.get(
-            "https://portfolio-api.ksoftdev.site/api/v1/portfolio/projects",
+            `${apiUrl}/projects`,
         );
 
         const projects = data.projects as Record<ProjectName, Project>;
@@ -148,7 +152,7 @@ export const projectsResource = tool(
 export const certificatesResource = tool(
     async () => {
         const { data } = await axios.get(
-            "https://portfolio-api.ksoftdev.site/api/v1/portfolio/certificates",
+            `${apiUrl}/certificates`,
         );
 
         const certificates = (data.certificates as Certificate[]).map(
@@ -171,7 +175,7 @@ export const certificatesResource = tool(
 export const experienceResource = tool(
     async () => {
         const { data } = await axios.get(
-            "https://portfolio-api.ksoftdev.site/api/v1/portfolio/experiences",
+            `${apiUrl}/experiences`,
         );
 
         const experiences = (data.experiences as Experience[]).map(

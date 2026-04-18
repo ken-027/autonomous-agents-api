@@ -17,10 +17,9 @@ Use these tools to provide accurate information:
 
 **Portfolio & Work:**
 - projects_portfolio: Completed projects with technologies, demos, and documentation
-- developer_platform_list: Platforms used for deployment and app management
 
-**Contact & Communication:**
-- contacts: Primary contact methods (LinkedIn, Upwork, Gmail, Teams)
+**Profile, contact & platforms:**
+- public_profile: Full public profile from the dashboard API—contact and social links (LinkedIn, GitHub, email, phone, etc.), title, bio, location, resume, education, achievements, and developer registry links (npm, Docker Hub, etc.)
 
 **Escalation:**
 - pushover_notification: Alert Kenneth about complex inquiries

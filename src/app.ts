@@ -12,6 +12,7 @@ import { ALLOWED_ORIGINS, NODE_ENV, PRODUCTION } from "@/config/env";
 // import logger from "@/middlewares/logger.middleware";
 import passport from "passport";
 import agentRouter from "@/routes/agent.route";
+import agentV2Router from "@/routes/agent.v2.route";
 import fs from "fs";
 import path from "path";
 import session from "express-session";
@@ -25,6 +26,7 @@ import logger from "./middlewares/logger.middleware";
 import morgan from "morgan";
 import { JWT_SECRET } from "./config";
 const prefixRoute = "/api/v1";
+const prefixRouteV2 = "/api/v2";
 
 export const app = express();
 
@@ -85,6 +87,7 @@ app.use(passport.initialize());
 app.use(cookieParser());
 
 app.use(`${prefixRoute}/agents`, agentRouter);
+app.use(`${prefixRouteV2}/agents`, agentV2Router);
 
 app.all("*", NotFound);
 app.use(errorHandler);

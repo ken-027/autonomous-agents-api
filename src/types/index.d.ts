@@ -115,9 +115,17 @@ export interface Skill {
     items: ItemSkill[];
 }
 
-export type SessionMessage = HumanMessage | ChatMessage | AIMessage
+export type SessionMessage = HumanMessage | ChatMessage | AIMessage;
+
+/** v2 OpenRouter /api/v2/agents thread (separate from LangChain `messages`) */
+export type OpenRouterThreadMessage = {
+    role: "user" | "assistant" | "system";
+    content: string;
+};
+
 export interface SessionMessages extends SessionData {
     messages?: SessionMessage[];
+    openrouterMessages?: OpenRouterThreadMessage[];
 }
 
 export type SessionRequest = Request & {

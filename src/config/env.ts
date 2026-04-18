@@ -18,6 +18,9 @@ export const REDIS_URL = env.REDIS_URL as string;
 
 export const MONGODB_URI = env.MONGODB_URI as string;
 export const OPENAI_API_KEY = env.OPENAI_API_KEY as string;
+export const OPENROUTER_API_KEY = env.OPENROUTER_API_KEY as string;
+/** Default model id for OpenRouter Responses / callModel (e.g. openai/gpt-4o-mini) */
+export const OPENROUTER_MODEL = (env.OPENROUTER_MODEL || "openai/gpt-4o-mini") as string;
 export const AI_MODEL = env.AI_MODEL as string;
 export const EMBEDDING_MODEL = env.EMBEDDING_MODEL as string;
 
