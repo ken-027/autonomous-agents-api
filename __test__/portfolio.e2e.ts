@@ -1,12 +1,17 @@
 import request from "supertest";
 import { Express } from "express";
 import createApp from "../src/app";
+import { pool } from "../src/config/db.connection";
 
 describe("agentic api endpoints", () => {
     let app: Express;
 
     beforeAll(() => {
         app = createApp;
+    });
+
+    afterAll(async () => {
+        await pool.end();
     });
 
     it("should return list of agents", async () => {
