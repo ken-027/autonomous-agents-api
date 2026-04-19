@@ -9,8 +9,8 @@ import {
     threadToInput,
 } from "./openrouter.shared";
 
-export function runCoverLetterOpenRouterAgent(thread: OpenRouterThreadMessage[]) {
-    const client = getOpenRouter();
+export async function runCoverLetterOpenRouterAgent(thread: OpenRouterThreadMessage[]) {
+    const client = await getOpenRouter();
     const sliced = sliceThreadForModel(thread);
     return client.callModel({
         model: defaultOpenRouterModel(),

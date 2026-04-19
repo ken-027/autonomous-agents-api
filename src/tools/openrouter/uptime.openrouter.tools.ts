@@ -1,10 +1,23 @@
 import { getWebsiteContent } from "@/tools/uptime-monitoring.tools";
-import { ToolType } from "@openrouter/sdk";
 import * as z from "zod/v4";
 
-export const uptimeOpenRouterTools = [
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let ToolType: any;
+
+async function getToolType() {
+    if (!ToolType) {
+        const module = await import("@openrouter/sdk");
+        ToolType = module.ToolType;
+    }
+    return ToolType;
+}
+
+export async function getUptimeOpenRouterTools() {
+    const toolType = await getToolType();
+
+    return [
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "fetch_html_content",
             description: "tool to fetch html content of a website",
@@ -15,4 +28,5 @@ export const uptimeOpenRouterTools = [
                 getWebsiteContent.invoke(params),
         },
     },
-] as const;
+    ] as const;
+}

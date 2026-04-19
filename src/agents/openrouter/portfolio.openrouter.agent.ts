@@ -20,8 +20,8 @@ You have access to all portfolio and email tools in one session. Use portfolio t
 
 ${PORTFOLIO_TEMPLATE}`;
 
-export function runPortfolioOpenRouterAgent(thread: OpenRouterThreadMessage[]) {
-    const client = getOpenRouter();
+export async function runPortfolioOpenRouterAgent(thread: OpenRouterThreadMessage[]) {
+    const client = await getOpenRouter();
     const sliced = sliceThreadForModel(thread);
     return client.callModel({
         model: defaultOpenRouterModel(),

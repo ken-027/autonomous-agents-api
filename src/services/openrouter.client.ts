@@ -1,11 +1,22 @@
-import { OpenRouter } from "@openrouter/sdk";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { OPENROUTER_API_KEY } from "@/config/env";
 
+type OpenRouter = any;
 let client: OpenRouter | undefined;
+let OpenRouterClass: any;
 
-export function getOpenRouter(): OpenRouter {
+async function getOpenRouterClass() {
+    if (!OpenRouterClass) {
+        const module = await import("@openrouter/sdk");
+        OpenRouterClass = module.OpenRouter;
+    }
+    return OpenRouterClass;
+}
+
+export async function getOpenRouter(): Promise<OpenRouter> {
     if (!client) {
-        client = new OpenRouter({
+        const OpenRouterConstructor = await getOpenRouterClass();
+        client = new OpenRouterConstructor({
             apiKey: OPENROUTER_API_KEY ?? "",
         });
     }

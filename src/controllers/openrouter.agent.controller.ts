@@ -47,17 +47,17 @@ export async function agent(
     const messages = request.session.openrouterMessages ?? [];
     messages.push({ role: "user", content: message });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const agents: Record<string, any> = {
-        github: runGithubOpenRouterAgent(messages),
-        portfolio: runPortfolioOpenRouterAgent(messages),
-    };
-
     response.setHeader("Content-Type", "text/plain; charset=utf-8");
     response.setHeader("Cache-Control", "no-cache");
     response.setHeader("Connection", "keep-alive");
 
-    const selectedAgent = agents[agentName];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const agentFunctions: Record<string, () => Promise<any>> = {
+        github: () => runGithubOpenRouterAgent(messages),
+        portfolio: () => runPortfolioOpenRouterAgent(messages),
+    };
+
+    const selectedAgent = await agentFunctions[agentName]();
     let aiResponse = "";
     for await (const delta of selectedAgent.getTextStream()) {
         response.write(delta);
@@ -86,7 +86,7 @@ export async function coverLetterAgent(
     const messages = request.session.openrouterMessages ?? [];
     messages.push({ role: "user", content: message });
 
-    const result = runCoverLetterOpenRouterAgent(messages);
+    const result = await runCoverLetterOpenRouterAgent(messages);
 
     response.setHeader("Content-Type", "text/plain; charset=utf-8");
     response.setHeader("Cache-Control", "no-cache");
