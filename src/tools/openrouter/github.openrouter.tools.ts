@@ -8,14 +8,27 @@ import {
     listOfForkedRepo,
     listOfRepoLanguages,
 } from "@/tools/github.tools";
-import { ToolType } from "@openrouter/sdk";
 import * as z from "zod/v4";
 
 const empty = z.object({});
 
-export const githubOpenRouterTools = [
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let ToolType: any;
+
+async function getToolType() {
+    if (!ToolType) {
+        const module = await import("@openrouter/sdk");
+        ToolType = module.ToolType;
+    }
+    return ToolType;
+}
+
+export async function getGithubOpenRouterTools() {
+    const toolType = await getToolType();
+
+    return [
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "public_repositories_list",
             description: "list of public repositories",
@@ -24,7 +37,7 @@ export const githubOpenRouterTools = [
         },
     },
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "repository_activities",
             description:
@@ -37,7 +50,7 @@ export const githubOpenRouterTools = [
         },
     },
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "contributed_repositories",
             description:
@@ -47,7 +60,7 @@ export const githubOpenRouterTools = [
         },
     },
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "repository_programming_languages",
             description: "List of programming languages of a repository",
@@ -59,7 +72,7 @@ export const githubOpenRouterTools = [
         },
     },
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "get_repository",
             description: "get repository details",
@@ -71,7 +84,7 @@ export const githubOpenRouterTools = [
         },
     },
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "get_repository_commits",
             description:
@@ -84,7 +97,7 @@ export const githubOpenRouterTools = [
         },
     },
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "get_repository_branches",
             description: "get list repository branches",
@@ -96,7 +109,7 @@ export const githubOpenRouterTools = [
         },
     },
     {
-        type: ToolType.Function,
+        type: toolType.Function,
         function: {
             name: "forked_repositories",
             description: "List of forked repositories",
@@ -104,4 +117,5 @@ export const githubOpenRouterTools = [
             execute: async () => listOfForkedRepo.invoke({}),
         },
     },
-] as const;
+    ] as const;
+}

@@ -1,6 +1,6 @@
 import { UPTIME_TEMPLATE } from "@/config/agents_prompt/uptime-monitoring.prompt";
 import { AppStatus } from "@/enum/uptime.enum";
-import { uptimeOpenRouterTools } from "@/tools/openrouter/uptime.openrouter.tools";
+import { getUptimeOpenRouterTools } from "@/tools/openrouter/uptime.openrouter.tools";
 import { getOpenRouter } from "@/services/openrouter.client";
 import { stepCountIs } from "@/utils/openrouter-stop";
 import * as z from "zod/v4";
@@ -41,8 +41,9 @@ function extractJsonObject(text: string): unknown {
     }
 }
 
-export function runUptimeOpenRouterAgent(thread: OpenRouterThreadMessage[]) {
-    const client = getOpenRouter();
+export async function runUptimeOpenRouterAgent(thread: OpenRouterThreadMessage[]) {
+    const client = await getOpenRouter();
+    const tools = await getUptimeOpenRouterTools();
     const sliced = sliceThreadForModel(thread);
     return client.callModel({
         model: defaultOpenRouterModel(),
@@ -61,7 +62,7 @@ Respond with a single JSON object only (no markdown) matching this shape:
   "responseTime": number
 }`,
         input: threadToInput(sliced),
-        tools: uptimeOpenRouterTools,
+        tools,
         stopWhen: stepCountIs(8),
     });
 }
@@ -69,7 +70,7 @@ Respond with a single JSON object only (no markdown) matching this shape:
 export async function invokeUptimeStructured(
     thread: OpenRouterThreadMessage[],
 ): Promise<z.infer<typeof UptimeStructured>> {
-    const result = runUptimeOpenRouterAgent(thread);
+    const result = await runUptimeOpenRouterAgent(thread);
     const text = await result.getText();
     const raw = extractJsonObject(text);
     return UptimeStructured.parse(raw);
