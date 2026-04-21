@@ -1,5 +1,5 @@
 import { HTTPCodes } from "@/enum/http.enum";
-import { RequestHandlerError } from "./request-handler.error";
+import { RequestHandlerError } from "./request-handler.error.js";
 
 export class UnAuthorizedError extends RequestHandlerError {
     statusCode: number = HTTPCodes.Unauthorized;

@@ -15,16 +15,19 @@ import agentRouter from "@/routes/agent.route";
 import agentV2Router from "@/routes/agent.v2.route";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import { pool } from "@/config/db.connection";
 
 // import swaggerUI from "swagger-ui-express";
-import swaggerSpec from "./swagger";
+import swaggerSpec from "./swagger.js";
 
-import logger from "./middlewares/logger.middleware";
+import logger from "./middlewares/logger.middleware.js";
 import morgan from "morgan";
-import { JWT_SECRET } from "./config";
+import { JWT_SECRET } from "./config/index.js";
 const prefixRoute = "/api/v1";
 const prefixRouteV2 = "/api/v2";
 

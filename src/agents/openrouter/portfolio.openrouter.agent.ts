@@ -10,7 +10,7 @@ import {
     defaultOpenRouterModel,
     sliceThreadForModel,
     threadToInput,
-} from "./openrouter.shared";
+} from "./openrouter.shared.js";
 
 const mergedInstructions = `${SUPERVISOR_PORTFOLIO_TEMPLATE}
 

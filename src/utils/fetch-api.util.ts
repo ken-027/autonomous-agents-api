@@ -3,7 +3,7 @@ import axios, {
     AxiosRequestConfig,
     AxiosResponse,
 } from "axios";
-import { errorLog } from "./logger.util";
+import { errorLog } from "./logger.util.js";
 
 export default async function fetchAPI(
     url: string,

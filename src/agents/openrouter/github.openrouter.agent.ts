@@ -7,7 +7,7 @@ import {
     defaultOpenRouterModel,
     sliceThreadForModel,
     threadToInput,
-} from "./openrouter.shared";
+} from "./openrouter.shared.js";
 
 export function runGithubOpenRouterAgent(thread: OpenRouterThreadMessage[]) {
     const client = getOpenRouter();

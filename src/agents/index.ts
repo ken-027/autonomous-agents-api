@@ -1,6 +1,6 @@
-import { Agent } from "openai/_shims";
-import { PortfolioSupervisor } from "./portfolio.agents";
-import { GithubAgent } from "./github.agent";
+import { Agent } from "@/enum/agents.enum.js";
+import { PortfolioSupervisor } from "./portfolio.agents.js";
+import { GithubAgent } from "./github.agent.js";
 
 export const AgentsConfig: Record<
     Agent,

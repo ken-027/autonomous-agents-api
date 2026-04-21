@@ -7,6 +7,7 @@ build({
     outdir: "public/api-docs",
     sourcemap: "inline",
     platform: "node",
+    format: "esm",
     bundle: true,
     plugins: [
         copy({

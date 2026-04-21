@@ -1,5 +1,5 @@
 import rateLimitPackage from "express-rate-limit";
-import { BASE_URL, EXCLUDE_FROM_RATELIMIT, PRODUCTION } from "../config/env";
+import { BASE_URL, EXCLUDE_FROM_RATELIMIT, PRODUCTION } from "../config/env.js";
 import { RedisStore } from "rate-limit-redis";
 import { redisClient } from "@/config/redis.connection";
 import { Request } from "express";

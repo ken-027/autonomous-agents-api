@@ -9,7 +9,7 @@ import {
     defaultOpenRouterModel,
     sliceThreadForModel,
     threadToInput,
-} from "./openrouter.shared";
+} from "./openrouter.shared.js";
 
 const UptimeStructured = z.object({
     siteType: z.string(),

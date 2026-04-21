@@ -1,5 +1,5 @@
 {
-    "exec": "SET NODE_ENV=development && ts-node-dev src/index.ts",
+    "exec": "cross-env NODE_ENV=development tsx src/index.ts",
     "watch": ["src"],
     "ext": "ts"
 }

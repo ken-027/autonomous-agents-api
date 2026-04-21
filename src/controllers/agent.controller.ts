@@ -40,7 +40,7 @@ export function agents(_req: Request, response: Response) {
     return response.json({
         agents: Object.keys(AgentsConfig).map((name) => ({
             name,
-            description: AgentsConfig[name].description,
+            description: AgentsConfig[name as keyof typeof AgentsConfig].description,
         })),
     });
 }
